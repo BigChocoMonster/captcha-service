@@ -1,3 +1,6 @@
+const screen = document.getElementById("__screen__");
+const context = screen.getContext("2d");
+
 function* charStream() {
   let i = 1;
 
@@ -10,15 +13,23 @@ function* charStream() {
 function insertText() {
   const stream = charStream();
 
-  let text = "";
   let next = stream.next();
+  let coordinates = {
+    x: 50,
+    y: context.canvas.height / 2,
+  };
   while (!next.done) {
-    text += next.value;
+    context.fillText(next.value, coordinates.x, coordinates.y);
+    coordinates.x += context.measureText(next.value).width + 20;
     next = stream.next();
   }
-
-  const screen = document.getElementById("__screen__");
-  screen.innerText = text;
 }
 
-insertText();
+function setCaptcha() {
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  context.font = "40px Poppins";
+
+  insertText();
+}
+
+setCaptcha();

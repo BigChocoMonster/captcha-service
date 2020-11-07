@@ -9,7 +9,7 @@
 <body>
   <div id='captcha'>
     <div id='__captcha__'>
-      <div id='__screen__'></div>
+      <canvas id='__screen__'></canvas>
       <div>
         <div id='__input-w__'>
           <label for='__captcha_input__'>Type the text above:</label>
@@ -17,7 +17,7 @@
           <button>Continue</button>
         </div>
         <div id='__controls__'>
-          <button class="control" onclick="insertText()">R</button>
+          <button class="control" onclick="setCaptcha()">R</button>
           <button class="control">S</button>
           <button class="control">H</button>
         </div>
