@@ -27,7 +27,7 @@ function insertText() {
 
 function setCaptcha() {
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-  context.font = "40px Poppins";
+  context.font = "50px Poppins";
 
   insertText();
 }
