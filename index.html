@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Captcha</title>
+  <link href="./styles.css" rel='stylesheet'>
+</head>
+<body>
+  <div id='captcha'>
+    <div id='__captcha__'>
+      <div id='__screen__'></div>
+      <div>
+        <div id='__input-w__'>
+          <label for='__captcha_input__'>Type the text above:</label>
+          <input id='__captcha_input__' />
+          <button>Continue</button>
+        </div>
+        <div id='__controls__'>
+          <button class="control" onclick="insertText()">R</button>
+          <button class="control">S</button>
+          <button class="control">H</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src='./index.js'></script>
+</body>
+</html>
