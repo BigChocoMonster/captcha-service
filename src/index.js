@@ -6,7 +6,7 @@ if (captcha) {
   // external stylesheet
   const link = document.createElement("link");
   link.rel = "stylesheet";
-  link.href = "styles.css";
+  link.href = "https://s3.amazonaws.com/captcha.s/captcha.s.min.css";
   link.onload = () => {
     shadowDOM.innerHTML += `
       <div id='__captcha__'>
@@ -18,8 +18,8 @@ if (captcha) {
             <button onclick="submitUserInput()">Continue</button>
           </div>
           <div id='__controls__'>
-            <button class="control" onclick="setCaptcha()"><img src='./reload.svg' width="10" height='10' /></button>
-            <button class="control" onclick="toggleInfoStatus(true)" ><img src='./help.svg' width="10" height='10' /></button>
+            <button class="control" onclick="setCaptcha()"><img src='https://s3.amazonaws.com/captcha.s/reload.svg' width="10" height='10' /></button>
+            <button class="control" onclick="toggleInfoStatus(true)" ><img src='https://s3.amazonaws.com/captcha.s/help.svg' width="10" height='10' /></button>
             <div id='__info-box__' data-status="hidden">
               Type text from screen in the input field and click 'Continue'.
               If the text matches, you have proved you are not a bot.

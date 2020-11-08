@@ -10,11 +10,22 @@ module.exports = function (grunt) {
         dest: "build/captcha.s.min.js",
       },
     },
+    cssmin: {
+      target: {
+        files: [
+          {
+            src: ["src/styles.css"],
+            dest: "build/captcha.s.min.css",
+          },
+        ],
+      },
+    },
   });
 
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks("grunt-contrib-uglify-es");
+  grunt.loadNpmTasks("grunt-contrib-cssmin");
 
   // Default task(s).
-  grunt.registerTask("default", ["uglify"]);
+  grunt.registerTask("default", ["uglify", "cssmin"]);
 };
