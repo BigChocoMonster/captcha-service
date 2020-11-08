@@ -1,5 +1,8 @@
+// screen render
 const screen = document.getElementById("__screen__");
 const context = screen.getContext("2d");
+
+let screenText;
 
 function* charStream() {
   let i = 1;
@@ -19,7 +22,6 @@ function getRandomYCoordinate() {
 }
 
 function insertText() {
-  console.log(context);
   const stream = charStream();
 
   let next = stream.next();
@@ -28,7 +30,8 @@ function insertText() {
     y: getRandomYCoordinate(),
   };
   while (!next.done) {
-    context.strokeText(next.value, coordinates.x, coordinates.y);
+    screenText += next.value;
+    context.fillText(next.value, coordinates.x, coordinates.y);
     coordinates.x += context.measureText(next.value).width + 20;
     coordinates.y = getRandomYCoordinate();
     next = stream.next();
@@ -36,6 +39,8 @@ function insertText() {
 }
 
 function setCaptcha() {
+  screenText = "";
+  document.getElementById("__captcha_input__").value = "";
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
   context.font = "50px Poppins";
 
@@ -55,10 +60,38 @@ function setCaptcha() {
 
   // changing font and shadow to a somewhat opposite color
   const [or, og, ob] = [255 - r, 255 - r, 255 - r];
-  context.strokeStyle = `rgb(${or}, ${og}, ${ob})`;
+  context.fillStyle = `rgb(${or}, ${og}, ${ob})`;
   context.shadowColor = `rgb(${or}, ${og}, ${ob})`;
 
   insertText();
 }
 
 setCaptcha();
+// -- x --
+
+// info control
+let isInfoVisible = false;
+function toggleInfoStatus() {
+  isInfoVisible = !isInfoVisible;
+  document
+    .getElementById("__info-box__")
+    .setAttribute("data-status", isInfoVisible ? "visible" : "hidden");
+}
+// -- x --
+
+// user submission
+function submitUserInput() {
+  const input = document.getElementById("__captcha_input__");
+  if (screenText === input.value) {
+    const captchaContainer = document.getElementById("__captcha__");
+    captchaContainer.innerHTML = "";
+
+    const successful = document.createElement("div");
+    successful.setAttribute("id", "__verified__");
+    successful.innerText = "Not a robot";
+
+    captchaContainer.appendChild(successful);
+  } else {
+    setCaptcha();
+  }
+}
